@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, View, TextInput } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
-const SearchBar = () =>
+const SearchBar = ( { term, onTermChange, onTermSubmit } ) =>
 {
     return (
         <View style={ styles.Wrapper }>
@@ -16,7 +16,12 @@ const SearchBar = () =>
                 placeholder="Enter search term..."
                 clearButtonMode="always"
                 returnKeyType="search"
-                clearButtonMode="always"
+                autoCapitalize="none"
+                autoCorrect={ false }
+                placeholderTextColor="#fff"
+                value={ term }
+                onChangeText={ newTerm => onTermChange( newTerm ) }
+                onEndEditing={ onTermSubmit }
             />
         </View>
     );
@@ -40,7 +45,8 @@ const styles = StyleSheet.create(
         {
             flex: 1,
             color: "#fff",
-            marginLeft: 10
+            marginLeft: 10,
+            fontSize: 18,
         },
         Icon:
         {
